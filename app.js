@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({
     extended: true,
 }
 ))
-
+app.use('/uploads/', express.static("uploads"));
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -31,6 +31,9 @@ app.get('/sendmail',function (req,res){
     res.render('mail')
 })
 
+app.get('/calculator',function(req,res){
+    res.render('calculator')
+})
 
 
 

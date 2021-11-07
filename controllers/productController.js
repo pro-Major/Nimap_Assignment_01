@@ -46,7 +46,8 @@ exports.createProduct = [uploads.single('Image'), async (req, res) => {
             stock: req.body.stock
         })
         res.status(200).json({
-            status: "Successfully Addded",
+            success : true,
+            status: "Product added successfully",
             data
         })
     }
@@ -96,8 +97,11 @@ exports.getProduct = async (req, res) => {
         })
         // const { products } = getPagingData(data, page, limit)
         res.status(200).json({
+            success : true,
+            count : data.count,
             status: "All Products",
             products : data
+
         })
     }
     catch (err) {

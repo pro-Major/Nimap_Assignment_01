@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   })
   Products.asscoiate = function(models){
     Products.belongsTo(models.Category,{
-      foreignKey : 'CategoryId'
+      foreignKey : 'categoryId'
     })
   }
   
