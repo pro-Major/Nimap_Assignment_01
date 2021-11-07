@@ -18,7 +18,7 @@ exports.createCategory = async (req, res, next) => {
     }
 }
 
-exports.GetCategory = async (req, res, next) => {
+exports.getCategory = async (req, res, next) => {
     try {
         // const getPagination = (page, size) => {
         //     const limit = size ? +size : 5;
@@ -52,7 +52,7 @@ exports.GetCategory = async (req, res, next) => {
     }
 }
 
-exports.GetCategoryById = async (req, res, next) => {
+exports.getCategoryById = async (req, res, next) => {
     try {
         const data = await db.Category.findByPk(req.params.id);
         if (!data) {
@@ -70,7 +70,7 @@ exports.GetCategoryById = async (req, res, next) => {
     }
 }
 
-exports.RemoveCategory = async (req, res, next) => {
+exports.deleteCategoryById = async (req, res, next) => {
     try {
         const removedata = await db.Category.destroy({ where: { id: req.params.id } })
         if (removedata === 0) {
@@ -90,12 +90,13 @@ exports.RemoveCategory = async (req, res, next) => {
     }
 }
 
-exports.UpdateCategory = async (req, res, next) => {
+exports.updateCategory = async (req, res, next) => {
     try {
-        const updatadata = await db.Category.update({
-            categoryName: req.body.categoryName
+        const data = await db.Category.update({
+            categoryName: req.body.categoryName,
+            isActive : req.body.isActive
         }, { where: { id: req.params.id } })
-        if (updatadata.includes(0)) {
+        if (data.includes(0)) {
             return res.status(400).json({
                 message: `Category with that id =${req.params.id} is not present`,
             })
@@ -103,7 +104,7 @@ exports.UpdateCategory = async (req, res, next) => {
         return res.status(200).json({
             success : true,
             message: "Category updated successfully",
-            updatadata: updatadata
+            data: data
         })
     } catch (err) {
         return res.status(500).json({
