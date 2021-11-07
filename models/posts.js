@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     created_by: DataTypes.INTEGER,
     category: DataTypes.INTEGER
+  },{
+    freezeTableName : true,
+    tableName : 'Posts'
   })
   Posts.asscoiate = function(models){
     Posts.belongsTo(models.Users,{
