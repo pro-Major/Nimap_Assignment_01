@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
         type : DataTypes.STRING,
         defaultValue: "user",
       }
-    })
+    },{
+      freezeTableName : true,
+      tableName : 'Users'
+    });
 
     Users.associate = function (models) {
       Users.hasMany(models.Posts,{

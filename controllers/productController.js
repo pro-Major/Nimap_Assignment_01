@@ -35,7 +35,7 @@ const uploads = multer({
 });
 
 exports.createProduct = [uploads.single('Image'), async (req, res) => {
-    
+
     try {
         const data = await db.Products.create({
             productName: req.body.productName,
@@ -46,7 +46,7 @@ exports.createProduct = [uploads.single('Image'), async (req, res) => {
             stock: req.body.stock
         })
         res.status(200).json({
-            success : true,
+            success: true,
             status: "Product added successfully",
             data
         })
@@ -55,7 +55,7 @@ exports.createProduct = [uploads.single('Image'), async (req, res) => {
         console.log(err)
         return res.status(400).json({
             message: "Something went Wrong",
-           
+
             err: (err.name == 'SequelizeUniqueConstraintError' ? 'Product Already Exist' : err.name)
         })
     }
@@ -66,45 +66,25 @@ exports.createProduct = [uploads.single('Image'), async (req, res) => {
 exports.getProduct = async (req, res) => {
     try {
 
-        // const getPagination = (page, size) => {
-        //     const limit = size ? +size : 5;
-        //     const offset = page ? page * limit : 0;
-        //     return { limit, offset };
-        // };
 
 
-        // const getPagingData = (data, page, limit) => {
-        //     const { count: totalItems, rows: products } = data;
-        //     const currentPage = page ? +page : 0;
-        //     const totalPages = Math.ceil(totalItems / limit);
-        //     return { totalItems, products, totalPages, currentPage };
-        // };
-
-        // const condition = req.query.price ? { price: req.query.price } : {}
-        // const { page, size } = req.query;
-        // const { limit, offset } = getPagination(page, size)
-
-        const data = await db.Products.findAndCountAll({
-            // where: condition,
-            // limit: limit,
-            // offset: offset,
-            // include: [
-            //     {
-            //         model: db.Category,
-            //         attribute: ['CName']
-            //     }
-            // ]
+        const data = await db.Products.findAll({
+            include: [
+                {
+                    model: db.Category,
+                }
+            ]
         })
-        // const { products } = getPagingData(data, page, limit)
         res.status(200).json({
-            success : true,
-            count : data.count,
+            success: true,
+            count: data.count,
             status: "All Products",
-            products : data
+            products: data
 
         })
     }
     catch (err) {
+        console.log(err)
         return res.status(500).json({
             message: "Something went Wrong"
         })

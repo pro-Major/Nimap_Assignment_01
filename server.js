@@ -3,6 +3,8 @@ const app = require('./app');
 const cluster = require('cluster');
 const dotenv = require('dotenv')
 dotenv.config({path: './.env'})
+const db = require('./models')
+
 const port = process.env.PORT || '3001'
 
 
@@ -47,6 +49,10 @@ if (cluster.isMaster) {
 
 
 } else {
-  server.listen(port);
+  db.sequelize.sync().then(function () {
+    server.listen(port, function () {
+    });
+
+});
 }
 

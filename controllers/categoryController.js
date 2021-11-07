@@ -20,25 +20,11 @@ exports.createCategory = async (req, res, next) => {
 
 exports.getCategory = async (req, res, next) => {
     try {
-        // const getPagination = (page, size) => {
-        //     const limit = size ? +size : 5;
-        //     const offset = page ? page * limit : 0;
-        //     return { limit, offset };
-        // };
-        // const getPagingData = (data, page, limit) => {
-        //     const { count: totalItems, rows: category } = data;
-        //     const currentPage = page ? +page : 0;
-        //     const totalPages = Math.ceil(totalItems / limit);
-        //     return { totalItems, category, totalPages, currentPage };
-        // };
-        // const { page, size } = req.query;
-        // const { limit, offset } = getPagination(page, size)
-
         const data = await db.Category.findAndCountAll({
-            // limit: limit,
-            // offset: offset,
+            include : [{
+                model : db.Products
+            }]
         })
-        // const { category } = getPagingData(data, page, limit)
         return res.status(200).json({ 
             success : true,
             data : data

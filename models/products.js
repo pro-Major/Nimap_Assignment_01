@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   const Products = sequelize.define('Products',{
     categoryId: DataTypes.INTEGER,
@@ -15,8 +13,11 @@ module.exports = (sequelize, DataTypes) => {
     productImage: DataTypes.TEXT,
     stock: DataTypes.INTEGER
 
+  },{
+    freezeTableName : true,
+    tableName : 'Products'
   })
-  Products.asscoiate = function(models){
+  Products.associate = function(models){
     Products.belongsTo(models.Category,{
       foreignKey : 'categoryId'
     })
