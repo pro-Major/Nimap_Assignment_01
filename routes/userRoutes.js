@@ -24,7 +24,7 @@ router
     .post(Login)
 
 router
-    .route('/logout')
+    .route('/tokenexpire')
     .get(authenticateUser,logoutFunction)
 
 
