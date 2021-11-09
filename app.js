@@ -4,8 +4,7 @@ const app = express();
 const bodyParser = require("body-parser");
 require('./models')
 
-//Importing Time Api
-const { findCountriesTimezone } = require('./controllers/currentTime')
+
 
 
 //Importing Middlewares 

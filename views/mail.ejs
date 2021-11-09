@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <h1>Send Mail</h1>
-        <form action="/api/sendmail/send" method="POST" enctype="application/json">
+        <form action="/api/sendmail/send" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <input class="form-control" type="email" name="emailTo" required placeholder="To:">
             </div>
@@ -29,10 +29,10 @@
                 <textarea required class="form-control" name="text" id="" cols="30" rows="10"
                     placeholder="Body:"></textarea>
             </div>
-            <!-- <label for="attachment">Attachment:</label>
+            <label for="attachment">Attachment:</label>
         <div class="form-group">
-            <input type="file" required class="form-control" name="image" id="">
-        </div> -->
+            <input type="file" required class="form-control" name="file" id="">
+        </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-block btn-danger">
                     Send Message

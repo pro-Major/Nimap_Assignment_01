@@ -5,57 +5,97 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="../uploads/styles/styles.css" >
-    <script src="calculator.js"> </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="../uploads/styles/styles.css">
+    <!-- <script src="../uploads/Javascript/calculator.js"> </script> -->
     <title>Calculator</title>
 </head>
 
 <body>
     <div class="calculator-main">
         <div class="output">
-            <div data-previous-element class="previous-element"></div>
-            <div data-current-element class="current-element"> </div>
+            <div class="previous-element"></div>
+            <div class="current-element"></div>
         </div>
-        
-    <button type="button" class="btn btn-danger all-clear-button ">AC</button>
-    <button type="button" class="btn btn-warning delete-button">⌫</button>
-    <button type="button" class="btn btn-info operator-button">÷</button>
-    <button type="button" class="btn btn-info"> </button>
+        <button type="button" class="btn btn-danger all-clear-button ">AC</button>
+        <button type="button" class="btn btn-warning delete-button">⌫</button>
+        <button type="button" class="btn btn-info operator-button">/</button>
+        <button type="button" class="btn btn-info"></button>
 
 
-    
-    
-    <button type="number-button" class="btn btn-dark number-button">7</button>
-    <button type="number-button" class="btn btn-dark number-button">8</button>
-    <button type="number-button" class="btn btn-dark number-button">9</button>
-    <button type="button" class="btn btn-info operator-button">*</button>
- 
-    <button type="number-button" class="btn btn-dark number-button">4</button>
-    <button type="number-button" class="btn btn-dark number-button">5</button>
-    <button type="number-button" class="btn btn-dark number-button">6</button>
-    <button type="button" class="btn btn-info operator-button">-</button>
 
-    <button type="number-button" class="btn btn-dark number-button">1</button>
-    <button type="number-button" class="btn btn-dark number-button">2</button>
-    <button type="number-button" class="btn btn-dark number-button">3</button>
-    <button type="button" class="btn btn-info operator-button">+</button>
-  
-    <button type="number-button" class="btn btn-dark number-button">0</button>
-    <button type="number-button" class="btn btn-dark number-button">.</button>
-    <button type="button" class="btn btn-success equal-button">=</button>
+
+        <button type="number-button" class="btn btn-dark number-button">7</button>
+        <button type="number-button" class="btn btn-dark number-button">8</button>
+        <button type="number-button" class="btn btn-dark number-button">9</button>
+        <button type="button" class="btn btn-info operator-button">*</button>
+
+        <button type="number-button" class="btn btn-dark number-button">4</button>
+        <button type="number-button" class="btn btn-dark number-button">5</button>
+        <button type="number-button" class="btn btn-dark number-button">6</button>
+        <button type="button" class="btn btn-info operator-button">-</button>
+
+        <button type="number-button" class="btn btn-dark number-button">1</button>
+        <button type="number-button" class="btn btn-dark number-button">2</button>
+        <button type="number-button" class="btn btn-dark number-button">3</button>
+        <button type="button" class="btn btn-info operator-button">+</button>
+
+        <button type="number-button" class="btn btn-dark number-button">0</button>
+        <button type="number-button" class="btn btn-dark number-button">.</button>
+        <button type="button" class="btn btn-success equal-button">=</button>
 
     </div>
 
+    <script>
+        const numberButtons = document.querySelectorAll("button.number-button")
+        const operatorButtons = document.querySelectorAll("button.operator-button")
+        const deleteButton = document.querySelector("button.delete-button")
+        const allClearButton = document.querySelector("button.all-clear-button")
+        const equalsButton = document.querySelector("button.equal-button")
+        const previousElement = document.querySelector(".previous-element")
+        const currentElement = document.querySelector(".current-element")
+        var finalValue;
+
+
+        numberButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                if (finalValue.includes('.')) {
+                    finalValue == finalValue
+                } else {
+                    currentElement.innerText += button.innerText
+                }
+            })
+        })
+        let currentOPerand;
+
+        operatorButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                currentElement.innerText += button.innerText
+            })
 
 
 
+        })
+
+        allClearButton.addEventListener("click", () => {
+            currentElement.innerText = null
+            previousElement.innerText = null
+        })
+        equalsButton.addEventListener("click", () => {
+            previousElement.innerText = currentElement.innerText
+            finalValue = eval(currentElement.innerText)
+            currentElement.innerText = finalValue
+        })
+
+        deleteButton.addEventListener("click", () => {
+            currentElement.innerText = currentElement.innerText.slice(0, -1)
+        })
 
 
-
-
-
-
+    </script>
 </body>
 
 </html>
