@@ -61,36 +61,34 @@ exports.createProduct = [uploads.single('Image'), async (req, res) => {
     }
 }]
 
-
-
-exports.getProduct = async (req, res) => {
-    try {
-
-
-
-        const data = await db.Products.findAll({
-            include: [
-                {
-                    model: db.Category,
-                }
-            ]
-        })
+exports.getProduct = function(req,res) {
+    return new Promise(function(resolve,reject){
+            data =  db.Products.findAll({
+                include : [
+                    model = db.Category
+                ]
+            })
+        if(!data){
+            reject()
+        }else{
+            resolve(data)
+        }
+    })
+    .then((data)=>{
         res.status(200).json({
-            success: true,
-            count: data.count,
-            status: "All Products",
-            products: data
-
+            success : true,
+            data : data
+        })   
+    })
+    .catch((err) =>{ 
+        res.status(403).json({
+            success : false,
+            message : err,
+        
         })
-    }
-    catch (err) {
-        console.log(err)
-        return res.status(500).json({
-            message: "Something went Wrong"
-        })
-    }
+    })
+    
 }
-
 
 exports.getProductById = async (req, res) => {
     try {
